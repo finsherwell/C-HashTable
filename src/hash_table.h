@@ -1,41 +1,31 @@
 #ifndef HASH_T_HEADER
 #define HASH_T_HEADER
 
-#include <stdbool.h>
-#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 
-// The hash table structure definition (forward declaration)
-typedef struct ht ht;
+#define MAX_SIZE_ENTRY 256
+#define INITIAL_TABLE_SIZE 8
+#define MAX_TABLE_SIZE 128
+#define MAX_LOAD_FACTOR 0.75
 
-// Create a new hash table and return a pointer to it
-ht* ht_create(void);
+typedef struct ht_entry ht_entry;
 
-// Destroy the hash table and free allocated memory
-void ht_destroy(ht* table);
+struct ht_entry {
+    char* key;
+    void* value;
+    ht_entry* next; // External Chain
+};
 
-// Retrieve the value associated with a key in the hash table
-void* ht_get(ht* table, const char* key);
-
-// Set (insert or update) a key-value pair in the hash table
-const char* ht_set(ht* table, const char* key, void* value);
-
-// Return the number of elements in the hash table
-size_t ht_length(ht* table);
-
-// Iterator structure for looping through the hash table
-typedef struct {
-    const char* key; // Current key in the iteration
-    void* value; // Current value in the iteration
-
-    ht* _table; // Reference to the hash table
-    size_t _index; // Current index in the iteration
-} ht_it;
-
-// Return an iterator to start iterating through the hash table
-ht_it ht_iterator(ht* table);
-
-// Move to the next item in the hash table and update the iterator
-bool ht_next(ht_it* it);
+int fnv1a_hash(char* key);
+void init_hash_table();
+bool resize_table();
+bool ht_insert(ht_entry* entry);
+ht_entry* ht_search(char* key);
+ht_entry* ht_delete(char* key);
+void print_table();
 
 #endif // HASH_T_HEADER
