@@ -36,9 +36,9 @@ The building of this project has been automated using Makefile for ease of use.
 
 ### Makefile Overview
 The Makefile automates the compilation process:
-```make```: Builds the ```test_hash_table``` executable.
-```make clean```: Removes object files and the executable, except ```info.txt```.
-```./build/test_hash_table```: Runs the executable so you can see output.
+- ```make```: Builds the ```test_hash_table``` executable.
+- ```make clean```: Removes object files and the executable, except ```info.txt```.
+- ```./build/test_hash_table```: Runs the executable so you can see output.
 
 ### Example Makefile Usage
 - Build the project:
