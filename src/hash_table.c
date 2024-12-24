@@ -14,6 +14,11 @@ int fnv1a_hash(char* key) {
     return hash;
 }
 
+// Hash Function (Simplified Name)
+int hash(char* key) {
+    return fnv1a_hash(key);
+}
+
 // Initiate Hash Table
 void init_hash_table() {
     hash_table = (ht_entry**)malloc(INITIAL_TABLE_SIZE * sizeof(ht_entry*));
@@ -42,7 +47,7 @@ bool resize_table() {
         ht_entry* entry = old_table[i];
         while (entry) {
             ht_entry* next = entry->next;
-            int index = fnv1a_hash(entry->key) % TABLE_SIZE;
+            int index = hash(entry->key) % TABLE_SIZE;
             entry->next = hash_table[index];
             hash_table[index] = entry;
             entry = next;
@@ -60,7 +65,7 @@ bool ht_insert(ht_entry* entry) {
             return false;
         }
     }
-    int index = fnv1a_hash(entry->key) % TABLE_SIZE;
+    int index = hash(entry->key) % TABLE_SIZE;
     entry->next = hash_table[index];
     hash_table[index] = entry;
     entry_count++;
@@ -69,7 +74,7 @@ bool ht_insert(ht_entry* entry) {
 
 // Search Item from Key
 ht_entry* ht_search(char* key) {
-    int index = fnv1a_hash(key) % TABLE_SIZE;
+    int index = hash(key) % TABLE_SIZE;
     ht_entry* entry = hash_table[index];
     while (entry) {
         if (strncmp(entry->key, key, MAX_SIZE_ENTRY) == 0) {
@@ -82,7 +87,7 @@ ht_entry* ht_search(char* key) {
 
 // Delete Item from Key
 ht_entry* ht_delete(char* key) {
-    int index = fnv1a_hash(key) % TABLE_SIZE;
+    int index = hash(key) % TABLE_SIZE;
     ht_entry* entry = hash_table[index];
     ht_entry* prev = NULL;
     while (entry) {

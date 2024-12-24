@@ -22,6 +22,7 @@ struct ht_entry {
 
 int fnv1a_hash(char* key);
 void init_hash_table();
+int hash(char* key);
 bool resize_table();
 bool ht_insert(ht_entry* entry);
 ht_entry* ht_search(char* key);

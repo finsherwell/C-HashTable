@@ -29,4 +29,4 @@ $(BUILD_DIR)/hash_table.o: $(SRC_DIR)/hash_table.c $(SRC_DIR)/hash_table.h
 
 # Clean Generated Files
 clean:
-	rm -rf $(BUILD_DIR)/*
+	rm -f $(BUILD_DIR)/*.o $(BUILD_DIR)/test_hash_table

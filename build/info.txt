@@ -1,0 +1,6 @@
+The build folder is used to store compiled files and executable programs generated during the build process. 
+These files are not part of the source code but are created as a result of compiling the code from the src folder.
+
+Contents:
+- Compiled Object Files: Intermediate files generated during compilation.
+- Executable File: The final program ready to run, named as test_hash_table.
